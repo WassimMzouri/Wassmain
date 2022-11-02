@@ -1,0 +1,521 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+ 
+    background-image : linear-gradient(250deg, rgb(163, 232, 245) 0%, rgb(145, 138, 247) 40%, rgb(55, 42, 241) 100%);
+
+    display: block;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    height: 10vh;
+    top: 0;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 0 2rem;
+}
+
+nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-container-principal{
+    margin-top: 7em;
+} 
+
+.logo {
+    font-size: 2rem;
+    display: none;
+}
+
+.toggle {
+    display: none; 
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    width: 800px;
+}
+
+.menu li a:hover{
+    color: rgb(145, 138, 247);
+}
+.menu li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn {
+    border: 0;
+    background: rgb(145, 138, 247);
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background: rgba(145, 138, 247, 0.575);
+     
+
+}
+
+.btn.btn-secondary {
+    background: transparent;
+    border: 2px solid rgb(145, 138, 247);
+    color: #fff;
+}
+
+.btn.btn-secondary:hover{
+    cursor: pointer;
+    background: rgba(145, 138, 247, 0.308);
+
+}
+
+ /*Section Hero : image de fond*/ 
+.hero {
+     
+    height: 50vmax;  
+    background-image: url('img/fond5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+/*Responsive menu*/
+@media all and (max-width: 1150px) {
+
+    header {
+        background: rgba(0, 0, 0, 0.753);      
+    }
+         
+    .toggle {
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 20;
+    }
+
+    .logo {
+        position: relative;
+        z-index: 20;
+        display: block;
+    }
+
+    .ouvrir {
+        display: block;         /* logo ouvrir */
+    }
+
+    .fermer {
+        display: none;          /* logo fermer */
+
+    }
+
+    .music{
+         display: none;         /* logo music */
+    }
+
+
+    .open{
+        overflow-y: hidden;
+    }
+
+    .open .titre{
+        display : none;         /* titre remplacer par logo music */
+    }
+
+    .open .music{
+        display: block;         /* logo music apres click bouton ouvrir */
+    }
+
+    .open .ouvrir {
+        display: none;          /* logo ouvrir apres click bouton ouvrir */
+    }
+    .open .fermer {
+        display: block;         /* logo fermer apres click bouton fermer */
+    }
+
+    .open .flex-container{
+        display: none;          /* Image menu none apres click bouton ouvrir */
+
+    }
+
+    .menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        flex-direction: column;
+        padding: 2rem;
+        justify-content: space-around;
+        transform: translateX(-100%);
+        transition: transform 1s;
+    }
+
+    .open h2 {
+        display: block;
+        position: absolute;
+    }
+    .menu li a {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 2rem;
+    }
+
+    .open .menu {
+        transform: translateX(0);
+    }
+
+    .hero {    
+
+        background-image: url('img/fond5.jpg');
+        /* height : 50vmax;
+        max-height : 100vh;
+        min-height: 100vh; */
+       
+        height : 100vmax;
+        max-height : 100%;
+        min-height: 100%;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+ 
+
+/*Search bar responsive*/
+.topnav {
+    overflow: hidden;
+    /*background-color: #000;*/
+  
+  }
+  
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;    
+    text-decoration: none;
+    font-size: 17px;     
+    color : #ffff
+  
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  .topnav .search-container {
+    float: right;
+  }
+  
+  .topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+  }
+  
+  .topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .topnav .search-container button:hover {
+    background: #ccc;
+  }
+  /*
+  @media screen and (max-width: 700px) {
+    .topnav .search-container {
+      float: none;
+    }
+    .topnav a, .topnav input[type=text], .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .topnav input[type=text] {
+      border: 1px solid #ccc;  
+    }
+  }
+ 
+*/
+
+
+
+
+
+
+/* Methode div flex box Menu Image*/
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    text-align: center;
+
+    position: relative;       
+}
+
+.flex-item {    
+    padding: 10px;
+    flex: 50%;  
+}
+
+.EveilImg{
+    width: 200px;
+    height: 200px;
+}
+
+.PratiqueImg{
+    width: 200px;
+    height: 200px;
+}
+
+.EnseignementImg{
+    width: 200px;
+    height: 200px;
+}
+
+.AccompagnementImg{
+    width: 200px;
+    height: 200px;
+}
+
+.DiffusionImg{
+    width: 200px;
+    height: 200px;
+}
+img:hover {
+    cursor: pointer;
+    box-shadow : 8px 8px 10px 0 rgba(0,0,0,0.5);
+}
+
+
+/*.centered {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
+ 
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Page Enseignement*/
+.btn-instrument{
+
+    width: 100px;
+    height: 50px;
+
+    color: white;
+
+    align-items: center;
+
+    background-color:rgba(142, 141, 158, 0.705);
+
+    margin: 10px;
+   
+}
+
+.btn-instrument:hover{
+    box-shadow: 5px 5px 7px 0 rgba(20, 204, 50, 0.685);
+    border-color: rgba(7, 168, 7, 0.705);
+}
+
+
+
+.btn-instrument-ajout{      
+    width: 10%;
+    height: 10%;
+
+    color: white;
+
+    align-items: center;
+    background-color:rgba(197, 56, 20, 0.678);
+    margin: 10px;
+}
+
+.btn-instrument-ajout:hover{
+        
+    background-color:rgba(20, 197, 58, 0.678);
+
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer CSS */
+footer{
+
+    /* background-color: rgba(29, 28, 28, 0.527); */
+    /* background: rgba(54, 51, 51, 0.849);       */
+    border-top: 1px solid ;
+    border-color: black;
+    text-align: center;
+}
+
+  
+  /* .footer {
+      padding:50px 0;
+      color:#f0f9ff;
+      background-color:#282d32;
+    }
+    
+    .footer-dark h3 {
+      margin-top:0;
+      margin-bottom:12px;
+      font-weight:bold;
+      font-size:16px;
+    }
+    
+    .footer-dark ul {
+      padding:0;
+      list-style:none;
+      line-height:1.6;
+      font-size:14px;
+      margin-bottom:0;
+    }
+    
+    .footer-dark ul a {
+      color:inherit;
+      text-decoration:none;
+      opacity:0.6;
+    }
+    
+    .footer-dark ul a:hover {
+      opacity:0.8;
+    }
+    
+    @media (max-width:767px) {
+      .footer-dark .item:not(.social) {
+        text-align:center;
+        padding-bottom:20px;
+      }
+    }
+    
+    .footer-dark .item.text {
+      margin-bottom:36px;
+    }
+    
+    @media (max-width:767px) {
+      .footer-dark .item.text {
+        margin-bottom:0;
+      }
+    }
+    
+    .footer-dark .item.text p {
+      opacity:0.6;
+      margin-bottom:0;
+    }
+    
+    .footer-dark .item.social {
+      text-align:center;
+    }
+    
+    @media (max-width:991px) {
+      .footer-dark .item.social {
+        text-align:center;
+        margin-top:20px;
+      }
+    }
+    
+    .footer-dark .item.social > a {
+      font-size:20px;
+      width:36px;
+      height:36px;
+      line-height:36px;
+      display:inline-block;
+      text-align:center;
+      border-radius:50%;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.4);
+      margin:0 8px;
+      color:#fff;
+      opacity:0.75;
+    }
+    
+    .footer-dark .item.social > a:hover {
+      opacity:0.9;
+    }
+    
+     */
