@@ -1,33 +1,77 @@
 <?php
-//on inclue un fichier contenant nom_de_serveur, nom_bdd, login et password d'accès à la bdd mysql
-include ("connect.php");
-//on vérifie que le visiteur a correctement saisi puis envoyé le formulaire
-if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
-if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['pwd']) && !empty($_POST['pwd']))) {
-//on se connecte à la bdd
+    /*************************
+    * Page: connexion.php
+    **************************/
 
-$sql = 'SELECT count(*) FROM membres WHERE id="'.mysql_escape_string($_POST['login']).'" 
-AND password="'.mysql_escape_string(password($_POST['pwd'])).'"';
-$req = mysql_query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysql_error());
-$data = mysql_fetch_array($req);
-mysql_free_result($req);mysql_close();
-// si on obtient une réponse, alors l'utilisateur est un membre
-//on ouvre une session pour cet utilisateur et on le connecte à l'espace membre
-if ($data[0] == 1){
-session_start();
-$_SESSION['login'] = $_POST['login'];
-header('Location: espace-membre.php');
-exit();}
-//si le visiteur a saisi un mauvais login ou mot de passe, on ne trouve aucune réponse
-elseif ($data[0] == 0) {
-$erreur = 'Login ou mot de passe non reconnu !';echo $erreur; 
-echo"<br/><a href=\"accueil.php\">Accueil</a>";exit();}
-// sinon, il existe un problème dans la base de données
-else {
-$erreur = 'Plusieurs membres ont<br/>les memes login et mot de passe !';echo $erreur; 
-echo"<br/><a href=\"accueil.php\">Accueil</a>";exit();}}
-else {
-$erreur = 'Errreur de saisie !<br/>Au moins un des champs est vide !'; echo $erreur; 
-echo"<br/><a href=\"accueil.php\">Accueil</a>";exit();}}
+session_start();//session_start() combiné à $_SESSION 
+
 ?>
 
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Connexion</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <?php
+        //si une session est déjà "isset" avec ce visiteur, on l'informe:
+        if(isset($_SESSION['pseudo'])){
+            echo "<h1>Bienvenue sur votre espace !</h1>";
+            echo "Vous êtes déjà connecté, vous pouvez accéder à l'espace membre en <a href='espace-membre.php'>cliquant ici</a>.";
+            echo "<br>";
+            echo "<br>";
+            echo "<a href='index.php'>Retour accueil</a>";
+        } else {
+            //si le formulaire est envoyé ("envoyé" signifie que le bouton submit est cliqué)
+            if(isset($_POST['valider'])){
+                //vérifie si tous les champs sont bien pris en compte:
+                if(!isset($_POST['pseudo'],$_POST['mdp'])){
+                    echo "Un des champs n'est pas reconnu.";
+                } else {
+                    //tous les champs sont précisés, on regarde si le membre est inscrit dans la bdd:
+                    //d'abord il faut créer une connexion à la base de données dans laquelle on souhaite regarder:
+                    $mysqli=mysqli_connect('localhost','root','','amac2');
+                    if(!$mysqli) {
+                        echo "Erreur connexion BDD";
+                        //Dans ce script, je pars du principe que les erreurs ne sont pas affichées sur le site, vous pouvez donc voir qu'elle erreur est survenue avec mysqli_error(), pour cela décommentez la ligne suivante:
+                        //echo "<br>Erreur retournée: ".mysqli_error($mysqli);
+                    } else {
+                        //on défini nos variables:
+                        $Pseudo=htmlentities($_POST['pseudo'],ENT_QUOTES,"UTF-8");//htmlentities avec ENT_QUOTES permet de sécuriser la requête pour éviter les injections SQL, UTF-8 pour dire de convertir en ce format
+                        $Mdp=md5($_POST['mdp']);
+                        $req=mysqli_query($mysqli,"SELECT * FROM membres WHERE pseudo='$Pseudo' AND mdp='$Mdp'");
+                        //on regarde si le membre est inscrit dans la bdd:
+                        if(mysqli_num_rows($req)!=1){
+                            echo "Pseudo ou mot de passe incorrect.";
+                        } else {
+                            //pseudo et mot de passe sont trouvé sur une même colonne, on ouvre une session:
+                            $_SESSION['pseudo']=$Pseudo;
+                            echo "<h1>Bienvenue $Pseudo !</h1>";
+                            echo "Vous êtes connecté avec succès ! Vous pouvez accéder à l'espace membre en <a href='espace-membre.php'>cliquant ici</a>.";
+                            echo "<br>";
+                            echo "<br>";
+                            echo "<a href='index.php'>Retour accueil</a>";
+                            $TraitementFini=true;//pour cacher le formulaire
+                        }
+                    }
+                }
+            }
+            if(!isset($TraitementFini)){//quand le membre sera connecté, on définira cette variable afin de cacher le formulaire
+                ?>
+                <h1>Se connecter [ <a href="inscription.php">Créer un compte</a> ]</h1>
+                <p>Remplissez le formulaire ci-dessous pour vous connecter :</p>
+                <form method="post" action="connexion.php">
+                    <input type="text" name="pseudo" placeholder="Votre pseudo..." required><!-- required permet d'empêcher l'envoi du formulaire si le champ est vide -->
+                    <input type="password" name="mdp" placeholder="Votre mot de passe..." required>
+                    <input type="submit" name="valider" value="Connexion">
+                </form>
+                <br> 
+                <a href="index.php">Retour accueil</a>
+                <?php
+            }
+        }
+        ?>
+    </body>
+</html>

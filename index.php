@@ -1,3 +1,10 @@
+
+<?php 
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,41 +16,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-    <link rel="stylesheet" href="styleW.css?v=1.x.x" />
+    <link rel="stylesheet" href="styleW.css?v=1.x.x" >
+
+    <link rel="icon" type="image/ico" sizes="16x16" href="img/icone.ico" >
 
 </head>
 
 <body>
 
-    <header>    
+    <header>   
 
-        <?php include('menu.php')?>   
+        <?php
 
-        </br>             
+            include('menu.php');
 
-      
+        ?>
 
     </header>
-    
-    
-    <?php include('RubriqueMenu.php')?>
-    
-    
-    <?php include('footer.php')?>
-    <!--<section class="hero"></section>             image de fond -->
-
-  
-
-  </br></br></br></br></br>
 
 
-        
+        <?php include('RubriqueMenu.php')?>
 
-    
+        <?php include('footer.php')?>
+        <!--<section class="hero"></section>             image de fond -->
+
+
+
+    </br></br></br></br></br>
+
+
 </body>
-
-
 </html>
-
 
 

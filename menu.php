@@ -1,3 +1,5 @@
+ 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +15,6 @@
  
 </head>
 <body>
-    
-
-
     
     <nav>
         <h2 class="titre">
@@ -34,22 +33,47 @@
 
         
         <ul class="menu">
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="Eveil.php">Eveil</a></li>
-            
+            <?php
+            if(isset($_SESSION['pseudo']) && $_SESSION['is_admin'] === '1') 
+            { // Si x est connecté on lui affiche la deconnexion
+            ?>
+                <li><a href="index.php">Accueil</a></li>
 
+                <li><a href="deconnexion.php"><button class="btn">Se déconnecter</button></a></li>
+                <li><a href="admin/home.php"><button class="btn btn-secondary">Espace admin</button></a></li>
+            <?php
+            }
 
+            elseif(isset($_SESSION['pseudo']) && $_SESSION['is_admin'] === '0')
+            { // Si x est connecté on lui affiche la deconnexion
+            ?>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="pageAnnonce.php">Annonces</a></li>
+                <li><a href="Eveil.php">Eveil</a></li>
+                <li><a href="Pratique.php">Pratique</a></li>
+                <li><a href="Enseignement.php">Enseignement</a></li>
+                <li><a href="Accompagnement.php">Accompagnement</a></li>
+                <li><a href="Diffusion.php">Diffusion</a></li>
+    
+                <li><a href="deconnexion.php"><button class="btn">Se déconnecter</button></a></li>
+                <li><a href="espace-membre.php"><button class="btn btn-secondary">Compte</button></a></li>
+            <?php
+            }
+            else {
+            ?> <!-- S'il est déconnecté on lui montre la connexion et l'inscription. -->
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="pageAnnonce.php">Annonces</a></li>
+                <li><a href="Eveil.php">Eveil</a></li>
+                <li><a href="Pratique.php">Pratique</a></li>
+                <li><a href="Enseignement.php">Enseignement</a></li>
+                <li><a href="Accompagnement.php">Accompagnement</a></li>
+                <li><a href="Diffusion.php">Diffusion</a></li>
 
-
-
-            <li><a href="Pratique.php">Pratique</a></li>
-            <li><a href="Enseignement.php">Enseignements</a></li>
-            <li><a href="Accompagnement.php">Accompagnement</a></li>
-            <li><a href="Diffusion.php">Diffusion</a></li>
-
-            <li><a href="inscription.php"><button class="btn">Inscription</button></a></li>
-            <li><a href="accueil.php"><button class="btn btn-secondary">Connexion</button></a></li>
-
+                <li><a href="inscription.php"><button class="btn">Inscription</button></a></li>
+                <li><a href="connexion.php"><button class="btn btn-secondary">Connexion</button></a></li>
+            <?php
+            }
+            ?>
         </ul>
 
     </nav>

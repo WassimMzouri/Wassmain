@@ -1,9 +1,14 @@
+<?php 
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>    
         <title>Pratique-Musique-12</title>
-
-        <link rel="stylesheet" href="styleW.css?v=1.x.x">    </head>
+        <link rel="stylesheet" href="styleW.css?v=1.x.x">    
+    </head>
     <body>
 
         <header>
@@ -12,20 +17,19 @@
 
         </header>            
         
-        </br></br></br></br></br></br></br>
+        <br><br><br><br><br><br><br>
 
 
-        <h1 style="color:black">Enseignement</h1></br>
+        <h1 style="color:black">Enseignement</h1><br>
 
         <div >
-            <p>Cliquer sur les Instrument que vous souhaitez découvrir :</p> </br>
+            <p>Cliquez sur les instruments que vous souhaitez découvrir :</p> </br>
 
 
-            <?php               
-                     
+            <?php                  
                 
                 include ('connect.php');
-                $sql="SELECT * FROM instrument";
+                $sql="SELECT * FROM Instrument";
                 $result = $pdo->query($sql);
                 
                 for($i=0; $i<$result->rowCount(); $i++)
@@ -45,8 +49,6 @@
                      
                 }
                 
-                   
-
                 /* Exception si pas d'instrument */
                 if($result->rowCount()<0){
                     echo "<br>Pas d'instrument :"."<br>";
@@ -66,15 +68,14 @@
         <!-- Ajouter un instrument dispo seulement pour admin -->
         <div>
             <h3>Ajouter un instrument </h3>
-            <form method="post">			 
+            <form method="post">             
                 
                 <label>Nouvel Instrument :</label>
                 <input type="text" name="nom">
-                
-                
                 <input class="btn-instrument-ajout" type="submit" value="Ajouter"></input>
+
             </form>
-            <?php	
+            <?php   
                 include ('connect.php');
                 if (isset($_POST['prenom'])) {
                     
@@ -89,25 +90,9 @@
             ?>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
         </br></br></br></br></br>
 
         <?php include('footer.php')?>
 
     </body>
 </html>
-

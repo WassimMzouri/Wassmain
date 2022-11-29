@@ -16,7 +16,7 @@
         </br></br></br></br></br></br></br>
 
 
-        <h1 style="color:black">SALUT VOUS ETES DANS LA PAGE Pratique</h1>
+        <h1 style="color:black">Page Pratique</h1>
 
         <div>
             <p>Bonjour</p>
